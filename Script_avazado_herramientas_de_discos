@@ -1,0 +1,70 @@
+#! /bin/bash
+#E un exercicio de clase
+# Este scipt agrupa as ferramentas necesarias para o tratamento de HDD
+
+i=y
+
+while [ $i = "y" ]
+do
+
+echo "1.mknod"
+echo "2.Lista /dev"
+echo "3.Creacion mnt/fda"
+echo "4.Comprobacion disco"
+echo "5.Formateo disco"
+echo "6.Montaje disco"
+echo "7.Comprobacion de montaje"
+echo "Elija la funcion necesaria"
+
+read ch
+
+if [ $ch = 1 ]
+	then echo "Creacion del recurso /dev/fda"
+fi
+
+if [ $ch = 2 ]
+	then echo "Listado de /dev/fd*"
+fi
+
+if [ $ch = 3 ]
+	then echo "Creacion del punto de montaje /mnt/fda"
+fi
+
+if [ $ch = 4 ]
+	then echo "Comprobacion del disco"
+fi
+
+if [ $ch = 5 ]
+	then echo "Formateo del disco"
+fi
+
+if [ $ch = 6 ]
+	then echo "Montaje del disco duro"
+fi
+
+if [ $ch = 7 ]
+	then "Comprobacion de montaje"
+fi
+
+case $ch in
+	1) mknod /dev/fda b 2 0
+	echo"Listo";;
+	2)ls /dev/fd*;;
+	3)mkdir /mnt/fda
+	echo "listo";;
+	4)fsck /dev/fda
+	echo "Comprobacion Finalizada";;
+	5)mkfs -t ext2 /dev/fda
+	echo "Formateo Finalizado";;
+	6)mount /dev/fda /mnt/fda
+	echo"Montaje realizado, regrese al menu y presione 7 para comprobarlo";;
+	7)mount;;
+	*)echo"Selecion Incorrecta";;
+esac
+echo "Desea volver al menu principal (y/n))"
+read i
+if [ $i != "y" ]
+then
+	exit
+fi
+done
